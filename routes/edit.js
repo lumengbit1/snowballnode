@@ -11,6 +11,7 @@ router.post('/', function(req, res, next) {
 
             return next(err);
         } else {
+
            if(typeof(req.body.delete)!='undefined'){
                 //console.log('delete',req.body.data)
                 querydata= 'DELETE FROM product.producttable WHERE id='+ req.body.data;

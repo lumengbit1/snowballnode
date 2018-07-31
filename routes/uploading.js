@@ -57,7 +57,10 @@ let upload = multer();
 //
 // })
 router.post('/',upload.single('file'), function(req, res, next) {
+    io.sockets.on('editsend', function (socket) {
+        console.log('editsend')
 
+    });
 
 // if(fileadd=='add') {
   // fileadd=''
@@ -76,18 +79,22 @@ router.post('/',upload.single('file'), function(req, res, next) {
         } else {
             //  console.log('get FormData Params: ', req.file.buffer);
 
-            //console.log(data)
-            conn.query('DELETE FROM product.producttable', [], function (err, result) {
+            console.log(databasedata[0].length)
+            if(databasedata[0].length!=5){
+                return res.status(400).json(err);;
+
+            }
+            conn.query('DELETE FROM product.productinfo', [], function (err, result) {
                 if (err) {
                     return next(err);
                 } else {
-                    conn.query('ALTER TABLE product.producttable AUTO_INCREMENT=1', [], function (err, result) {
+                    conn.query('ALTER TABLE product.productinfo AUTO_INCREMENT=1', [], function (err, result) {
                         if (err) {
                             //return next(err);
                             return res.status(400).json(err);
                         } else {
                             console.log(databasedata)
-                            let querydata = 'INSERT INTO product.producttable(`name`, `norm`, `number`, `price`, `memberprice`, `pay`, `address`, `code`, `remark`) VALUES ?';
+                            let querydata = 'INSERT INTO product.productinfo(`name`, `price`, `memprice`, `weight`) VALUES ?';
                             let sqldata = [];
                             //console.log(data[0].length)
 
@@ -103,7 +110,7 @@ router.post('/',upload.single('file'), function(req, res, next) {
                             databasedata.shift();
 
 
-      //                      console.log(Object.values(databasedata))
+                         //  console.log(Object.values(databasedata))
                             conn.query(querydata, [Object.values(databasedata)], function (err, result) {
                                 if (err) {
                                     //return next(err);
