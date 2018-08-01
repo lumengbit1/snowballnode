@@ -33,15 +33,15 @@ router.post('/', function(req, res, next) {
 
              if(typeof(req.body.filters)!='undefined'){
 
-                 querydata= 'SELECT * FROM product.producttable where name like\'%'+req.body.filters.toString() +'%\' LIMIT '+ n +','+ m;
-                 total = 'select count(*) from product.producttable where name like\'%'+req.body.filters.toString()+'%\'';
+                 querydata= 'SELECT * FROM product.custom where name like\'%'+req.body.filters.toString() +'%\' LIMIT '+ n +','+ m;
+                 total = 'select count(*) from product.custom where name like\'%'+req.body.filters.toString()+'%\'';
 
             }else if(typeof(req.body.all)!='undefined'){
-                 querydata= 'SELECT * FROM product.producttable';
-                 total = 'select count(*) from product.producttable';
+                 querydata= 'SELECT * FROM product.product';
+                 total = 'select count(*) from product.product';
              }else{
-                 querydata= 'SELECT * FROM product.producttable LIMIT '+ n +','+ m;
-                 total = 'select count(*) from product.producttable';
+                 querydata= 'SELECT * FROM product.custom LIMIT '+ n +','+ m;
+                 total = 'select count(*) from product.product';
             }
            //  const  querydata= 'SELECT * FROM product.producttable LIMIT '+ n +','+ m;
             //console.log(querydata)
@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
                                     return next(err);
                                 } else {
                                     data.push(result);
-                                    //console.log('data2',data)
+                                   // console.log('data2',data)
                                     res.send(JSON.stringify(data));
                                 }
                             });
