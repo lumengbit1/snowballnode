@@ -11,6 +11,7 @@ let usersRouter = require('./routes/users');
 let databaseRouter = require('./routes/database');
 let uploadRouter = require('./routes/uploading');
 let editRouter = require('./routes/edit');
+let subdatabaseRouter = require('./routes/subdatabase')
 
 let app = express();
 
@@ -56,6 +57,7 @@ app.all('*',function (req, res, next) {
 app.use('/', databaseRouter);
 app.use('/upload', uploadRouter);
 app.use('/edit', editRouter);
+app.use('/subtable', subdatabaseRouter);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
