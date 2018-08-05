@@ -34,9 +34,15 @@ server.on('listening', onListening);
 io.sockets.on('connection', function (socket) {
     console.log('connect')
     socket.on('editsend', function (msg) {
-        console.log('editsend');
+       // console.log('editsend');
         socket.emit('refresh'); // Send message to sender
         socket.broadcast.emit('refresh'); // Send message to everyone BUT sender
+
+    });
+    socket.on('subeditsend', function (msg) {
+        // console.log('editsend');
+        socket.emit('subrefresh'); // Send message to sender
+        socket.broadcast.emit('subrefresh'); // Send message to everyone BUT sender
 
     });
 });

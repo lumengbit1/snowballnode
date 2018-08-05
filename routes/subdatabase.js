@@ -14,9 +14,11 @@ router.post('/', function(req, res, next) {
             let  querydata='';
             let total = '';
             //    console.log('m',m)
-            //      console.log(req.body);
+
 
                 querydata= 'SELECT * FROM product.product where customname=\''+req.body.indexname+'\'';
+
+
 
             //  const  querydata= 'SELECT * FROM product.producttable LIMIT '+ n +','+ m;
             //console.log(querydata)
